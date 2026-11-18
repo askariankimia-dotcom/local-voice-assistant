@@ -1,5 +1,8 @@
 # Voice Assistant: Local LLM + British English Text-to-Speech
 
+## Demo
+https://github.com/user-attachments/assets/7f3d9ac1-7cd7-4248-9c31-93ef430c89af
+
 A web-based conversational prototype. You type a message, a small **locally running LLM** writes a reply, and the reply is shown on screen and **spoken in British English** by a **local** speech engine. No cloud AI or TTS services are used.
 
 - **Frontend:** React (Vite). Chat interface, play/stop button on each reply, speech on/off switch, voice and speaking-rate settings.
