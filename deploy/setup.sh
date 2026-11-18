@@ -26,7 +26,7 @@ sleep 3
 ollama pull "$MODEL"
 
 echo "==> 3/6 Application files"
-id voice >/dev/null 2>&1 || useradd --system --home "$APP_DIR" --shell /usr/sbin/nologin voice
+id voiceapp >/dev/null 2>&1 || useradd --system --home "$APP_DIR" --shell /usr/sbin/nologin voiceapp
 mkdir -p "$APP_DIR"
 rsync -a --delete --exclude '.venv' --exclude 'models' --exclude 'data' --exclude 'node_modules' "$SOURCE_DIR"/ "$APP_DIR"/
 if [ ! -f "$APP_DIR/frontend/dist/index.html" ]; then
@@ -40,7 +40,7 @@ cd "$APP_DIR/backend"
 .venv/bin/pip install --quiet --upgrade pip
 .venv/bin/pip install --quiet -r requirements.txt
 .venv/bin/python download_models.py
-chown -R voice:voice "$APP_DIR"
+chown -R voiceapp:voiceapp "$APP_DIR"
 
 echo "==> 5/6 Background service"
 # Password for the private reports page (created once, kept on later runs).
@@ -54,7 +54,7 @@ Description=Voice Assistant (local LLM + British TTS)
 After=network.target ollama.service
 
 [Service]
-User=voice
+User=voiceapp
 WorkingDirectory=$APP_DIR/backend
 Environment=OLLAMA_MODEL=$MODEL
 EnvironmentFile=/etc/voice-assistant.env

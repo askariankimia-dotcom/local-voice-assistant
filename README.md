@@ -54,19 +54,15 @@ npm run dev
 
 Open the address Vite prints (usually http://localhost:5173).
 
-## Run as a single web server (deployment)
+### One-command deployment on a fresh Ubuntu 24.04 or Debian 13 server
+
+First build the website on your own computer (the built `frontend/dist` folder is not stored in the repository):
 
 ```bash
-cd frontend && npm run build        # creates frontend/dist
-cd ../backend && source .venv/bin/activate
-uvicorn main:app --host 0.0.0.0 --port 8765
+cd frontend && npm install && npm run build
 ```
 
-FastAPI now serves both the website and the API on port 8765. Put it behind a reverse proxy (e.g. nginx or Caddy) with HTTPS for public access. Ollama must run on the same server.
-
-### One-command deployment on a fresh Ubuntu 24.04 server
-
-Upload the project (including the built `frontend/dist`) to the server and run, as root:
+Then upload the project, including `frontend/dist`, to the server and run, as root:
 
 ```bash
 bash deploy/setup.sh                      # default model: qwen3:4b-instruct
